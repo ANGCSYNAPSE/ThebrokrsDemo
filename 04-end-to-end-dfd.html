@@ -1,51 +1,1227 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TheBrokrs — Simple End-to-End App Flow</title>
-<style>
-:root{--ink:#25322c;--muted:#65716b;--bg:#efeee9;--paper:#fff;--line:#aeb7b2;--green:#2f7558;--green-soft:#dcecdf;--pink:#f6dbe1;--orange:#ffd8a2;--blue:#dceaff;--yellow:#fff3c7;--process:#ffac98;--red:#f5d8d4}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-header{background:#1d2a24;color:#fff;padding:38px 4vw 30px;border-bottom:5px solid #c5d676}header small{color:#c5d676;font-weight:900;letter-spacing:.13em}h1{font-size:clamp(31px,5vw,58px);line-height:1;margin:9px 0 12px;letter-spacing:-.04em}header p{max-width:800px;color:#cbd3cf;line-height:1.55;margin:0}.links{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}.links a{color:#fff;text-decoration:none;border:1px solid #68766f;border-radius:7px;padding:8px 11px;font-size:11px}.links a:first-child{background:#c5d676;border-color:#c5d676;color:#1d2a24;font-weight:800}
-.jump{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:12px 4vw;display:flex;gap:7px;overflow:auto}.jump a{white-space:nowrap;text-decoration:none;color:var(--ink);border:1px solid #ccd1ce;border-radius:99px;padding:7px 11px;font-size:9px}.jump a:hover{background:var(--green-soft);border-color:var(--green)}
-main{padding:34px 4vw 75px}.guide{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:30px}.guide div{background:#fff;border:1px solid var(--line);padding:14px;border-top:4px solid var(--green)}.guide b{display:block;font-size:11px;margin-bottom:4px}.guide small{font-size:9px;color:var(--muted);line-height:1.4}
-.chunk{background:var(--paper);border:1px solid var(--line);margin:0 0 25px;box-shadow:0 8px 24px #28362f0c}.chunk-head{display:flex;align-items:center;gap:13px;padding:18px 20px;border-bottom:1px solid #d5d9d7}.num{width:34px;height:34px;border-radius:50%;background:#21332a;color:#fff;display:grid;place-items:center;font-size:11px;font-weight:900;flex:0 0 auto}.chunk-head h2{font-size:17px;margin:0}.chunk-head p{font-size:10px;color:var(--muted);margin:4px 0 0}.flow{padding:24px;display:flex;align-items:center;gap:10px;overflow:auto;min-height:145px}.node{min-width:150px;max-width:190px;min-height:74px;border:2px solid #59675f;border-radius:8px;background:#fff;padding:12px;text-align:center;display:flex;flex-direction:column;justify-content:center;box-shadow:3px 3px 0 #d4d7d4}.node b{font-size:11px}.node small{font-size:9px;color:var(--muted);line-height:1.35;margin-top:5px}.node.user{background:var(--pink);border-color:#9c6b76}.node.process{background:var(--process);border-color:#9d5c4c}.node.system{background:var(--green-soft);border-color:var(--green)}.node.partner{background:var(--blue);border-color:#5b7799}.node.admin{background:var(--orange);border-color:#a57536}.node.reward{background:var(--yellow);border-color:#a08a3c}.node.error{background:var(--red);border-color:#a15d54}.node.end{background:#21332a;color:#fff;border-color:#21332a}.node.end small{color:#cbd4cf}.arrow{min-width:42px;text-align:center;color:var(--green);font-weight:900;font-size:21px}.arrow span{display:block;font-size:7px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:3px}.decision{min-width:112px;height:112px;background:#eee5f4;border:2px solid #745889;transform:rotate(45deg);display:grid;place-items:center;margin:0 20px}.decision span{transform:rotate(-45deg);font-size:9px;text-align:center;font-weight:800;line-height:1.3}.branch{padding:0 24px 20px;display:grid;grid-template-columns:1fr 1fr;gap:10px}.branch div{border:1px dashed #88948e;background:#fafaf7;padding:11px;font-size:9px;line-height:1.5}.branch b{color:var(--green)}
-.home-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:24px}.home-card{border:1.5px solid #718079;background:#f8f8f5;padding:14px;min-height:106px}.home-card b{display:block;font-size:11px;margin-bottom:5px}.home-card small{font-size:9px;color:var(--muted);line-height:1.4}.home-card i{font-style:normal;color:var(--green);font-size:9px;font-weight:800;display:block;margin-top:10px}
-.service-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;padding:24px}.service{border:1px solid var(--line);border-top:4px solid var(--green);padding:14px;background:#fafaf8}.service h3{font-size:11px;margin:0 0 7px}.service .mini-flow{font-size:9px;line-height:1.7;color:var(--muted)}.service .mini-flow b{color:var(--green)}
-.rules{padding:0 24px 24px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.rule{border:1px solid var(--line);background:#fafaf7;padding:13px}.rule b{font-size:10px;display:block}.rule small{font-size:8px;color:var(--muted);line-height:1.45;display:block;margin-top:4px}.points{font-size:20px!important;color:#8a6b04!important;font-weight:900}.note{margin:0 24px 22px;background:#fff9dc;border:1px solid #bca75b;padding:12px;font-size:9px;line-height:1.55}.note b{color:#725d0e}.state{padding:0 24px 24px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}.state span{border:1px solid #adb6b1;background:#f5f6f3;padding:6px 8px;font-size:8px}.state i{font-style:normal;color:var(--green);font-weight:900}
-footer{text-align:center;font-size:9px;color:var(--muted);padding:15px}
-@media(max-width:900px){.guide,.service-grid{grid-template-columns:1fr 1fr}.home-grid{grid-template-columns:repeat(2,1fr)}.rules{grid-template-columns:1fr 1fr}}@media(max-width:560px){.guide,.service-grid,.home-grid,.rules,.branch{grid-template-columns:1fr}.flow{padding:18px}.chunk-head{padding:15px}.decision{margin:0 17px}}
-@media print{@page{size:A3 landscape;margin:8mm}header,.jump,.guide,footer{display:none}main{padding:0}.chunk{page-break-inside:avoid;box-shadow:none;margin-bottom:7mm}.flow{overflow:visible}.node{min-width:120px}.service-grid{grid-template-columns:repeat(4,1fr)}}
-</style>
-</head>
-<body>
-<header><small>THEBROKRS · SIMPLE PRODUCT FLOW</small><h1>What happens next?</h1><p>Separate, plain-language flows for first visit, sign up, login, onboarding, Home, services, KYC points, rewards, referrals, redemption, partners, and administrators.</p><div class="links"><a href="index.html">← Design pack home</a><a href="flow.html">Detailed operating flow</a><a href="03-product-design-architecture.md">Product architecture</a><a href="W_Flow.html">Screen wireframes</a></div></header>
-<nav class="jump"><a href="#first">First visit</a><a href="#auth">Login & signup</a><a href="#onboarding">Onboarding</a><a href="#home">Home</a><a href="#services">Services</a><a href="#kyc">KYC points</a><a href="#rewards">Rewards</a><a href="#referral">Referral</a><a href="#redeem">Redemption</a><a href="#partner">Partner</a><a href="#admin">Admin</a><a href="#support">Failures & support</a></nav>
-<main>
-<section class="guide"><div><b>One chunk = one task</b><small>Each section starts at a clear entry and finishes at a useful result.</small></div><div><b>Arrows say what happens</b><small>The small arrow label explains why the user moves forward.</small></div><div><b>Rewards are not instant cash</b><small>Points can be pending, available, used, expired, or taken back after a refund.</small></div><div><b>Every task is trackable</b><small>Applications, orders, bookings and cases appear in Activity.</small></div></section>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>TheBrokrs — Simple End-to-End App Flow</title>
+    <style>
+      :root {
+        --ink: #25322c;
+        --muted: #65716b;
+        --bg: #efeee9;
+        --paper: #fff;
+        --line: #aeb7b2;
+        --green: #2f7558;
+        --green-soft: #dcecdf;
+        --pink: #f6dbe1;
+        --orange: #ffd8a2;
+        --blue: #dceaff;
+        --yellow: #fff3c7;
+        --process: #ffac98;
+        --red: #f5d8d4;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family:
+          Inter,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+      }
+      header {
+        background: #1d2a24;
+        color: #fff;
+        padding: 38px 4vw 30px;
+        border-bottom: 5px solid #c5d676;
+      }
+      header small {
+        color: #c5d676;
+        font-weight: 900;
+        letter-spacing: 0.13em;
+      }
+      h1 {
+        font-size: clamp(31px, 5vw, 58px);
+        line-height: 1;
+        margin: 9px 0 12px;
+        letter-spacing: -0.04em;
+      }
+      header p {
+        max-width: 800px;
+        color: #cbd3cf;
+        line-height: 1.55;
+        margin: 0;
+      }
+      .links {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 20px;
+      }
+      .links a {
+        color: #fff;
+        text-decoration: none;
+        border: 1px solid #68766f;
+        border-radius: 7px;
+        padding: 8px 11px;
+        font-size: 11px;
+      }
+      .links a:first-child {
+        background: #c5d676;
+        border-color: #c5d676;
+        color: #1d2a24;
+        font-weight: 800;
+      }
+      .jump {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        background: #fff;
+        border-bottom: 1px solid var(--line);
+        padding: 12px 4vw;
+        display: flex;
+        gap: 7px;
+        overflow: auto;
+      }
+      .jump a {
+        white-space: nowrap;
+        text-decoration: none;
+        color: var(--ink);
+        border: 1px solid #ccd1ce;
+        border-radius: 99px;
+        padding: 7px 11px;
+        font-size: 9px;
+      }
+      .jump a:hover {
+        background: var(--green-soft);
+        border-color: var(--green);
+      }
+      main {
+        padding: 34px 4vw 75px;
+      }
+      .guide {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        margin-bottom: 30px;
+      }
+      .guide div {
+        background: #fff;
+        border: 1px solid var(--line);
+        padding: 14px;
+        border-top: 4px solid var(--green);
+      }
+      .guide b {
+        display: block;
+        font-size: 11px;
+        margin-bottom: 4px;
+      }
+      .guide small {
+        font-size: 9px;
+        color: var(--muted);
+        line-height: 1.4;
+      }
+      .chunk {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        margin: 0 0 25px;
+        box-shadow: 0 8px 24px #28362f0c;
+      }
+      .chunk-head {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        padding: 18px 20px;
+        border-bottom: 1px solid #d5d9d7;
+      }
+      .num {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: #21332a;
+        color: #fff;
+        display: grid;
+        place-items: center;
+        font-size: 11px;
+        font-weight: 900;
+        flex: 0 0 auto;
+      }
+      .chunk-head h2 {
+        font-size: 17px;
+        margin: 0;
+      }
+      .chunk-head p {
+        font-size: 10px;
+        color: var(--muted);
+        margin: 4px 0 0;
+      }
+      .flow {
+        padding: 24px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        overflow: auto;
+        min-height: 145px;
+      }
+      .node {
+        min-width: 150px;
+        max-width: 190px;
+        min-height: 74px;
+        border: 2px solid #59675f;
+        border-radius: 8px;
+        background: #fff;
+        padding: 12px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        box-shadow: 3px 3px 0 #d4d7d4;
+      }
+      .node b {
+        font-size: 11px;
+      }
+      .node small {
+        font-size: 9px;
+        color: var(--muted);
+        line-height: 1.35;
+        margin-top: 5px;
+      }
+      .node.user {
+        background: var(--pink);
+        border-color: #9c6b76;
+      }
+      .node.process {
+        background: var(--process);
+        border-color: #9d5c4c;
+      }
+      .node.system {
+        background: var(--green-soft);
+        border-color: var(--green);
+      }
+      .node.partner {
+        background: var(--blue);
+        border-color: #5b7799;
+      }
+      .node.admin {
+        background: var(--orange);
+        border-color: #a57536;
+      }
+      .node.reward {
+        background: var(--yellow);
+        border-color: #a08a3c;
+      }
+      .node.error {
+        background: var(--red);
+        border-color: #a15d54;
+      }
+      .node.end {
+        background: #21332a;
+        color: #fff;
+        border-color: #21332a;
+      }
+      .node.end small {
+        color: #cbd4cf;
+      }
+      .arrow {
+        min-width: 42px;
+        text-align: center;
+        color: var(--green);
+        font-weight: 900;
+        font-size: 21px;
+      }
+      .arrow span {
+        display: block;
+        font-size: 7px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+        margin-bottom: 3px;
+      }
+      .decision {
+        min-width: 112px;
+        height: 112px;
+        background: #eee5f4;
+        border: 2px solid #745889;
+        transform: rotate(45deg);
+        display: grid;
+        place-items: center;
+        margin: 0 20px;
+      }
+      .decision span {
+        transform: rotate(-45deg);
+        font-size: 9px;
+        text-align: center;
+        font-weight: 800;
+        line-height: 1.3;
+      }
+      .branch {
+        padding: 0 24px 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .branch div {
+        border: 1px dashed #88948e;
+        background: #fafaf7;
+        padding: 11px;
+        font-size: 9px;
+        line-height: 1.5;
+      }
+      .branch b {
+        color: var(--green);
+      }
+      .home-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+        padding: 24px;
+      }
+      .home-card {
+        border: 1.5px solid #718079;
+        background: #f8f8f5;
+        padding: 14px;
+        min-height: 106px;
+      }
+      .home-card b {
+        display: block;
+        font-size: 11px;
+        margin-bottom: 5px;
+      }
+      .home-card small {
+        font-size: 9px;
+        color: var(--muted);
+        line-height: 1.4;
+      }
+      .home-card i {
+        font-style: normal;
+        color: var(--green);
+        font-size: 9px;
+        font-weight: 800;
+        display: block;
+        margin-top: 10px;
+      }
+      .service-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 11px;
+        padding: 24px;
+      }
+      .service {
+        border: 1px solid var(--line);
+        border-top: 4px solid var(--green);
+        padding: 14px;
+        background: #fafaf8;
+      }
+      .service h3 {
+        font-size: 11px;
+        margin: 0 0 7px;
+      }
+      .service .mini-flow {
+        font-size: 9px;
+        line-height: 1.7;
+        color: var(--muted);
+      }
+      .service .mini-flow b {
+        color: var(--green);
+      }
+      .rules {
+        padding: 0 24px 24px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+      .rule {
+        border: 1px solid var(--line);
+        background: #fafaf7;
+        padding: 13px;
+      }
+      .rule b {
+        font-size: 10px;
+        display: block;
+      }
+      .rule small {
+        font-size: 8px;
+        color: var(--muted);
+        line-height: 1.45;
+        display: block;
+        margin-top: 4px;
+      }
+      .points {
+        font-size: 20px !important;
+        color: #8a6b04 !important;
+        font-weight: 900;
+      }
+      .note {
+        margin: 0 24px 22px;
+        background: #fff9dc;
+        border: 1px solid #bca75b;
+        padding: 12px;
+        font-size: 9px;
+        line-height: 1.55;
+      }
+      .note b {
+        color: #725d0e;
+      }
+      .state {
+        padding: 0 24px 24px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .state span {
+        border: 1px solid #adb6b1;
+        background: #f5f6f3;
+        padding: 6px 8px;
+        font-size: 8px;
+      }
+      .state i {
+        font-style: normal;
+        color: var(--green);
+        font-weight: 900;
+      }
+      footer {
+        text-align: center;
+        font-size: 9px;
+        color: var(--muted);
+        padding: 15px;
+      }
+      @media (max-width: 900px) {
+        .guide,
+        .service-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .home-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .rules {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 560px) {
+        .guide,
+        .service-grid,
+        .home-grid,
+        .rules,
+        .branch {
+          grid-template-columns: 1fr;
+        }
+        .flow {
+          padding: 18px;
+        }
+        .chunk-head {
+          padding: 15px;
+        }
+        .decision {
+          margin: 0 17px;
+        }
+      }
+      @media print {
+        @page {
+          size: A3 landscape;
+          margin: 8mm;
+        }
+        header,
+        .jump,
+        .guide,
+        footer {
+          display: none;
+        }
+        main {
+          padding: 0;
+        }
+        .chunk {
+          page-break-inside: avoid;
+          box-shadow: none;
+          margin-bottom: 7mm;
+        }
+        .flow {
+          overflow: visible;
+        }
+        .node {
+          min-width: 120px;
+        }
+        .service-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <small>THEBROKRS · SIMPLE PRODUCT FLOW</small>
+      <h1>What happens next?</h1>
+      <p>
+        Separate, plain-language flows for first visit, sign up, login,
+        onboarding, Home, services, KYC points, rewards, referrals, redemption,
+        partners, and administrators.
+      </p>
+      <div class="links">
+        <a href="index.html">← Design pack home</a>
+        <!-- <a href="flow.html">Detailed operating flow</a> -->
+        <!-- <a href="03-product-design-architecture.md">Product architecture</a> -->
+        <a href="W_Flow.html">Screen wireframes</a>
+      </div>
+    </header>
+    <nav class="jump">
+      <a href="#first">First visit</a><a href="#auth">Login & signup</a
+      ><a href="#onboarding">Onboarding</a><a href="#home">Home</a
+      ><a href="#services">Services</a><a href="#kyc">KYC points</a
+      ><a href="#rewards">Rewards</a><a href="#referral">Referral</a
+      ><a href="#redeem">Redemption</a><a href="#partner">Partner</a
+      ><a href="#admin">Admin</a><a href="#support">Failures & support</a>
+    </nav>
+    <main>
+      <section class="guide">
+        <div>
+          <b>One chunk = one task</b
+          ><small
+            >Each section starts at a clear entry and finishes at a useful
+            result.</small
+          >
+        </div>
+        <div>
+          <b>Arrows say what happens</b
+          ><small
+            >The small arrow label explains why the user moves forward.</small
+          >
+        </div>
+        <div>
+          <b>Rewards are not instant cash</b
+          ><small
+            >Points can be pending, available, used, expired, or taken back
+            after a refund.</small
+          >
+        </div>
+        <div>
+          <b>Every task is trackable</b
+          ><small
+            >Applications, orders, bookings and cases appear in Activity.</small
+          >
+        </div>
+      </section>
 
-<section class="chunk" id="first"><div class="chunk-head"><span class="num">01</span><div><h2>First visit</h2><p>What a new or returning visitor sees when opening the app.</p></div></div><div class="flow"><div class="node user"><b>User opens app</b><small>First visit or returning visit</small></div><div class="arrow"><span>app checks</span>→</div><div class="decision"><span>Already signed in?</span></div><div class="arrow"><span>yes</span>→</div><div class="node end"><b>Open Home</b><small>Show active work and next actions</small></div></div><div class="branch"><div><b>NO:</b> Show a short welcome screen, then take the user to Login or Create Account.</div><div><b>YES:</b> Skip welcome and onboarding. Restore the last unfinished task when useful.</div></div></section>
+      <section class="chunk" id="first">
+        <div class="chunk-head">
+          <span class="num">01</span>
+          <div>
+            <h2>First visit</h2>
+            <p>What a new or returning visitor sees when opening the app.</p>
+          </div>
+        </div>
+        <div class="flow">
+          <div class="node user">
+            <b>User opens app</b><small>First visit or returning visit</small>
+          </div>
+          <div class="arrow"><span>app checks</span>→</div>
+          <div class="decision"><span>Already signed in?</span></div>
+          <div class="arrow"><span>yes</span>→</div>
+          <div class="node end">
+            <b>Open Home</b><small>Show active work and next actions</small>
+          </div>
+        </div>
+        <div class="branch">
+          <div>
+            <b>NO:</b> Show a short welcome screen, then take the user to Login
+            or Create Account.
+          </div>
+          <div>
+            <b>YES:</b> Skip welcome and onboarding. Restore the last unfinished
+            task when useful.
+          </div>
+        </div>
+      </section>
 
-<section class="chunk" id="auth"><div class="chunk-head"><span class="num">02</span><div><h2>Login and account creation</h2><p>The same phone flow works for a new account and a returning account.</p></div></div><div class="flow"><div class="node user"><b>Enter phone number</b><small>India +91 mobile number</small></div><div class="arrow"><span>send code</span>→</div><div class="node process"><b>Enter OTP</b><small>Auto-read, resend, or voice option</small></div><div class="arrow"><span>verify</span>→</div><div class="decision"><span>Account exists?</span></div><div class="arrow"><span>returning</span>→</div><div class="node end"><b>Open Home</b><small>Login complete</small></div></div><div class="branch"><div><b>NEW ACCOUNT:</b> Create the profile, add 100 welcome points as Pending, then continue to short onboarding.</div><div><b>OTP FAILED:</b> Explain the problem, allow resend/change number, and never erase the entered phone number.</div></div><div class="note"><b>Welcome rule:</b> A new person receives <strong>100 points</strong> after successful phone verification and account creation. The ledger first records them as Pending, then makes them Available after the basic account checks pass.</div></section>
+      <section class="chunk" id="auth">
+        <div class="chunk-head">
+          <span class="num">02</span>
+          <div>
+            <h2>Login and account creation</h2>
+            <p>
+              The same phone flow works for a new account and a returning
+              account.
+            </p>
+          </div>
+        </div>
+        <div class="flow">
+          <div class="node user">
+            <b>Enter phone number</b><small>India +91 mobile number</small>
+          </div>
+          <div class="arrow"><span>send code</span>→</div>
+          <div class="node process">
+            <b>Enter OTP</b><small>Auto-read, resend, or voice option</small>
+          </div>
+          <div class="arrow"><span>verify</span>→</div>
+          <div class="decision"><span>Account exists?</span></div>
+          <div class="arrow"><span>returning</span>→</div>
+          <div class="node end">
+            <b>Open Home</b><small>Login complete</small>
+          </div>
+        </div>
+        <div class="branch">
+          <div>
+            <b>NEW ACCOUNT:</b> Create the profile, add 100 welcome points as
+            Pending, then continue to short onboarding.
+          </div>
+          <div>
+            <b>OTP FAILED:</b> Explain the problem, allow resend/change number,
+            and never erase the entered phone number.
+          </div>
+        </div>
+        <div class="note">
+          <b>Welcome rule:</b> A new person receives
+          <strong>100 points</strong> after successful phone verification and
+          account creation. The ledger first records them as Pending, then makes
+          them Available after the basic account checks pass.
+        </div>
+      </section>
 
-<section class="chunk" id="onboarding"><div class="chunk-head"><span class="num">03</span><div><h2>Short onboarding</h2><p>Collect only enough information to make Home useful. Everything else is asked when needed.</p></div></div><div class="flow"><div class="node process"><b>Name</b><small>How we should address the user</small></div><div class="arrow"><span>next</span>→</div><div class="node process"><b>City</b><small>Nearby services and partners</small></div><div class="arrow"><span>next</span>→</div><div class="node process"><b>Choose interests</b><small>Insurance · land · farming · IT etc.</small></div><div class="arrow"><span>save</span>→</div><div class="node system"><b>Explain permissions</b><small>Ask location/notifications only with a reason</small></div><div class="arrow"><span>finish</span>→</div><div class="node end"><b>Personalized Home</b><small>Onboarding can also be skipped</small></div></div></section>
+      <section class="chunk" id="onboarding">
+        <div class="chunk-head">
+          <span class="num">03</span>
+          <div>
+            <h2>Short onboarding</h2>
+            <p>
+              Collect only enough information to make Home useful. Everything
+              else is asked when needed.
+            </p>
+          </div>
+        </div>
+        <div class="flow">
+          <div class="node process">
+            <b>Name</b><small>How we should address the user</small>
+          </div>
+          <div class="arrow"><span>next</span>→</div>
+          <div class="node process">
+            <b>City</b><small>Nearby services and partners</small>
+          </div>
+          <div class="arrow"><span>next</span>→</div>
+          <div class="node process">
+            <b>Choose interests</b
+            ><small>Insurance · land · farming · IT etc.</small>
+          </div>
+          <div class="arrow"><span>save</span>→</div>
+          <div class="node system">
+            <b>Explain permissions</b
+            ><small>Ask location/notifications only with a reason</small>
+          </div>
+          <div class="arrow"><span>finish</span>→</div>
+          <div class="node end">
+            <b>Personalized Home</b
+            ><small>Onboarding can also be skipped</small>
+          </div>
+        </div>
+      </section>
 
-<section class="chunk" id="home"><div class="chunk-head"><span class="num">04</span><div><h2>Home screen and main navigation</h2><p>Home answers: what can I do, what is active, and what needs my attention?</p></div></div><div class="home-grid"><div class="home-card"><b>Home</b><small>Resume unfinished work, view active services, see recommendations.</small><i>Start or continue</i></div><div class="home-card"><b>Explore</b><small>Search, browse categories, compare, save, and request details.</small><i>Find a service</i></div><div class="home-card"><b>Activity</b><small>All applications, orders, visits, projects, claims, and support cases.</small><i>Track progress</i></div><div class="home-card"><b>Rewards</b><small>Points, service credits, referral progress, vouchers, and expiry.</small><i>Earn or use value</i></div><div class="home-card"><b>Profile</b><small>KYC, bank, documents, family, privacy, security, and help.</small><i>Manage account</i></div></div><div class="note"><b>Home rule:</b> Services and unfinished tasks come first. Rewards support the journey, but they do not hide the main reason the user opened the app.</div></section>
+      <section class="chunk" id="home">
+        <div class="chunk-head">
+          <span class="num">04</span>
+          <div>
+            <h2>Home screen and main navigation</h2>
+            <p>
+              Home answers: what can I do, what is active, and what needs my
+              attention?
+            </p>
+          </div>
+        </div>
+        <div class="home-grid">
+          <div class="home-card">
+            <b>Home</b
+            ><small
+              >Resume unfinished work, view active services, see
+              recommendations.</small
+            ><i>Start or continue</i>
+          </div>
+          <div class="home-card">
+            <b>Explore</b
+            ><small
+              >Search, browse categories, compare, save, and request
+              details.</small
+            ><i>Find a service</i>
+          </div>
+          <div class="home-card">
+            <b>Activity</b
+            ><small
+              >All applications, orders, visits, projects, claims, and support
+              cases.</small
+            ><i>Track progress</i>
+          </div>
+          <div class="home-card">
+            <b>Rewards</b
+            ><small
+              >Points, service credits, referral progress, vouchers, and
+              expiry.</small
+            ><i>Earn or use value</i>
+          </div>
+          <div class="home-card">
+            <b>Profile</b
+            ><small
+              >KYC, bank, documents, family, privacy, security, and help.</small
+            ><i>Manage account</i>
+          </div>
+        </div>
+        <div class="note">
+          <b>Home rule:</b> Services and unfinished tasks come first. Rewards
+          support the journey, but they do not hide the main reason the user
+          opened the app.
+        </div>
+      </section>
 
-<section class="chunk" id="services"><div class="chunk-head"><span class="num">05</span><div><h2>Start a service from Home</h2><p>Every service begins the same way, then follows its own simple completion steps.</p></div></div><div class="flow"><div class="node user"><b>Home</b><small>User taps a service</small></div><div class="arrow"><span>browse</span>→</div><div class="node process"><b>Service list</b><small>Search · filter · compare · save</small></div><div class="arrow"><span>choose</span>→</div><div class="node process"><b>Service detail</b><small>Price · risk · partner · timeline · terms</small></div><div class="arrow"><span>continue</span>→</div><div class="node system"><b>Check what is needed</b><small>KYC · documents · quote · payment</small></div><div class="arrow"><span>complete</span>→</div><div class="node end"><b>Show in Activity</b><small>Status, owner, next step and support</small></div></div><div class="service-grid"><article class="service"><h3>Insurance</h3><div class="mini-flow">Compare plans <b>→</b> get quote <b>→</b> fill proposal <b>→</b> pay premium <b>→</b> policy issued <b>→</b> renew or claim</div></article><article class="service"><h3>Financial investment</h3><div class="mini-flow">Risk questions <b>→</b> choose product <b>→</b> KYC/bank check <b>→</b> confirm order <b>→</b> units allocated <b>→</b> track or redeem</div></article><article class="service"><h3>Land investment</h3><div class="mini-flow">View land <b>→</b> request details <b>→</b> site visit <b>→</b> legal check <b>→</b> reserve <b>→</b> agreement/registration <b>→</b> track holding</div></article><article class="service"><h3>Property</h3><div class="mini-flow">Search property <b>→</b> save/compare <b>→</b> schedule visit <b>→</b> make offer <b>→</b> legal check <b>→</b> rent/buy case</div></article><article class="service"><h3>Hybrid farming</h3><div class="mini-flow">View project <b>→</b> understand risks <b>→</b> choose units <b>→</b> sign agreement <b>→</b> pay <b>→</b> track milestones and payout</div></article><article class="service"><h3>ClickCard</h3><div class="mini-flow">Choose plan <b>→</b> check benefits <b>→</b> pay membership <b>→</b> activate card <b>→</b> use benefits <b>→</b> renew</div></article><article class="service"><h3>IT solutions</h3><div class="mini-flow">Choose package or request <b>→</b> receive estimate <b>→</b> approve contract <b>→</b> milestone payment <b>→</b> review delivery <b>→</b> support</div></article><article class="service"><h3>Healthcare</h3><div class="mini-flow">Find doctor/hospital <b>→</b> choose slot <b>→</b> consent/payment <b>→</b> appointment <b>→</b> reports <b>→</b> follow-up</div></article></div></section>
+      <section class="chunk" id="services">
+        <div class="chunk-head">
+          <span class="num">05</span>
+          <div>
+            <h2>Start a service from Home</h2>
+            <p>
+              Every service begins the same way, then follows its own simple
+              completion steps.
+            </p>
+          </div>
+        </div>
+        <div class="flow">
+          <div class="node user">
+            <b>Home</b><small>User taps a service</small>
+          </div>
+          <div class="arrow"><span>browse</span>→</div>
+          <div class="node process">
+            <b>Service list</b><small>Search · filter · compare · save</small>
+          </div>
+          <div class="arrow"><span>choose</span>→</div>
+          <div class="node process">
+            <b>Service detail</b
+            ><small>Price · risk · partner · timeline · terms</small>
+          </div>
+          <div class="arrow"><span>continue</span>→</div>
+          <div class="node system">
+            <b>Check what is needed</b
+            ><small>KYC · documents · quote · payment</small>
+          </div>
+          <div class="arrow"><span>complete</span>→</div>
+          <div class="node end">
+            <b>Show in Activity</b
+            ><small>Status, owner, next step and support</small>
+          </div>
+        </div>
+        <div class="service-grid">
+          <article class="service">
+            <h3>Insurance</h3>
+            <div class="mini-flow">
+              Compare plans <b>→</b> get quote <b>→</b> fill proposal
+              <b>→</b> pay premium <b>→</b> policy issued <b>→</b> renew or
+              claim
+            </div>
+          </article>
+          <article class="service">
+            <h3>Financial investment</h3>
+            <div class="mini-flow">
+              Risk questions <b>→</b> choose product <b>→</b> KYC/bank check
+              <b>→</b> confirm order <b>→</b> units allocated <b>→</b> track or
+              redeem
+            </div>
+          </article>
+          <article class="service">
+            <h3>Land investment</h3>
+            <div class="mini-flow">
+              View land <b>→</b> request details <b>→</b> site visit
+              <b>→</b> legal check <b>→</b> reserve
+              <b>→</b> agreement/registration <b>→</b> track holding
+            </div>
+          </article>
+          <article class="service">
+            <h3>Property</h3>
+            <div class="mini-flow">
+              Search property <b>→</b> save/compare <b>→</b> schedule visit
+              <b>→</b> make offer <b>→</b> legal check <b>→</b> rent/buy case
+            </div>
+          </article>
+          <article class="service">
+            <h3>Hybrid farming</h3>
+            <div class="mini-flow">
+              View project <b>→</b> understand risks <b>→</b> choose units
+              <b>→</b> sign agreement <b>→</b> pay <b>→</b> track milestones and
+              payout
+            </div>
+          </article>
+          <article class="service">
+            <h3>ClickCard</h3>
+            <div class="mini-flow">
+              Choose plan <b>→</b> check benefits <b>→</b> pay membership
+              <b>→</b> activate card <b>→</b> use benefits <b>→</b> renew
+            </div>
+          </article>
+          <article class="service">
+            <h3>IT solutions</h3>
+            <div class="mini-flow">
+              Choose package or request <b>→</b> receive estimate
+              <b>→</b> approve contract <b>→</b> milestone payment
+              <b>→</b> review delivery <b>→</b> support
+            </div>
+          </article>
+          <article class="service">
+            <h3>Healthcare</h3>
+            <div class="mini-flow">
+              Find doctor/hospital <b>→</b> choose slot <b>→</b> consent/payment
+              <b>→</b> appointment <b>→</b> reports <b>→</b> follow-up
+            </div>
+          </article>
+        </div>
+      </section>
 
-<section class="chunk" id="kyc"><div class="chunk-head"><span class="num">06</span><div><h2>KYC flow and step points</h2><p>Ask only for the verification needed by the selected service. Give 10 points after each successful step.</p></div></div><div class="flow"><div class="node user"><b>User continues service</b><small>The chosen action needs verification</small></div><div class="arrow"><span>check profile</span>→</div><div class="decision"><span>Which check is missing?</span></div><div class="arrow"><span>complete one</span>→</div><div class="node process"><b>Verify step</b><small>Submit and wait for success</small></div><div class="arrow"><span>success</span>→</div><div class="node reward"><b>+10 points</b><small>One-time reward for this KYC step</small></div><div class="arrow"><span>return</span>→</div><div class="node end"><b>Resume service</b><small>Continue exactly where user stopped</small></div></div><div class="rules"><div class="rule"><b>Phone verification</b><small class="points">+10</small><small>A separate one-time KYC reward. A new user can also receive the 100-point welcome reward.</small></div><div class="rule"><b>PAN verification</b><small class="points">+10</small><small>Reward once after the verification provider confirms success.</small></div><div class="rule"><b>Identity / Aadhaar check</b><small class="points">+10</small><small>Store a token/status, not unnecessary identity data.</small></div><div class="rule"><b>Bank verification</b><small class="points">+10</small><small>Reward once after account ownership is confirmed.</small></div><div class="rule"><b>Address verification</b><small class="points">+10</small><small>Only ask when the selected service needs it.</small></div><div class="rule"><b>Video KYC</b><small class="points">+10</small><small>Reward once after review is approved, not after upload.</small></div></div><div class="note"><b>Anti-abuse rule:</b> The 100 welcome points and the 10 phone-KYC points are separate ledger entries. Each KYC capability can earn its 10-point reward only once per user. Re-upload, refresh, rejection, or repeated verification does not earn again.</div></section>
+      <section class="chunk" id="kyc">
+        <div class="chunk-head">
+          <span class="num">06</span>
+          <div>
+            <h2>KYC flow and step points</h2>
+            <p>
+              Ask only for the verification needed by the selected service. Give
+              10 points after each successful step.
+            </p>
+          </div>
+        </div>
+        <div class="flow">
+          <div class="node user">
+            <b>User continues service</b
+            ><small>The chosen action needs verification</small>
+          </div>
+          <div class="arrow"><span>check profile</span>→</div>
+          <div class="decision"><span>Which check is missing?</span></div>
+          <div class="arrow"><span>complete one</span>→</div>
+          <div class="node process">
+            <b>Verify step</b><small>Submit and wait for success</small>
+          </div>
+          <div class="arrow"><span>success</span>→</div>
+          <div class="node reward">
+            <b>+10 points</b><small>One-time reward for this KYC step</small>
+          </div>
+          <div class="arrow"><span>return</span>→</div>
+          <div class="node end">
+            <b>Resume service</b
+            ><small>Continue exactly where user stopped</small>
+          </div>
+        </div>
+        <div class="rules">
+          <div class="rule">
+            <b>Phone verification</b><small class="points">+10</small
+            ><small
+              >A separate one-time KYC reward. A new user can also receive the
+              100-point welcome reward.</small
+            >
+          </div>
+          <div class="rule">
+            <b>PAN verification</b><small class="points">+10</small
+            ><small
+              >Reward once after the verification provider confirms
+              success.</small
+            >
+          </div>
+          <div class="rule">
+            <b>Identity / Aadhaar check</b><small class="points">+10</small
+            ><small>Store a token/status, not unnecessary identity data.</small>
+          </div>
+          <div class="rule">
+            <b>Bank verification</b><small class="points">+10</small
+            ><small>Reward once after account ownership is confirmed.</small>
+          </div>
+          <div class="rule">
+            <b>Address verification</b><small class="points">+10</small
+            ><small>Only ask when the selected service needs it.</small>
+          </div>
+          <div class="rule">
+            <b>Video KYC</b><small class="points">+10</small
+            ><small
+              >Reward once after review is approved, not after upload.</small
+            >
+          </div>
+        </div>
+        <div class="note">
+          <b>Anti-abuse rule:</b> The 100 welcome points and the 10 phone-KYC
+          points are separate ledger entries. Each KYC capability can earn its
+          10-point reward only once per user. Re-upload, refresh, rejection, or
+          repeated verification does not earn again.
+        </div>
+      </section>
 
-<section class="chunk" id="rewards"><div class="chunk-head"><span class="num">07</span><div><h2>How points are earned</h2><p>Users see the amount, reason, availability date, and expiry before or after each eligible action.</p></div></div><div class="flow"><div class="node process"><b>Eligible action happens</b><small>Signup · KYC · referral · service milestone</small></div><div class="arrow"><span>calculate</span>→</div><div class="node system"><b>Check reward rule</b><small>Correct rule · cap · duplicate · fraud</small></div><div class="arrow"><span>record</span>→</div><div class="node reward"><b>Points Pending</b><small>Waiting for refund or review period</small></div><div class="arrow"><span>approved</span>→</div><div class="node reward"><b>Points Available</b><small>User can redeem them</small></div><div class="arrow"><span>show</span>→</div><div class="node end"><b>Rewards history</b><small>Reason, date, expiry and status</small></div></div><div class="rules"><div class="rule"><b>New account</b><small class="points">+100</small><small>After successful phone verification and account creation.</small></div><div class="rule"><b>Each completed KYC step</b><small class="points">+10</small><small>One time for each listed verification capability.</small></div><div class="rule"><b>Qualified referral</b><small class="points">Campaign value</small><small>Only after the friend completes the published qualifying action.</small></div><div class="rule"><b>Service completion</b><small class="points">Rule value</small><small>Use a fixed, published milestone reward. Do not imply investment return.</small></div><div class="rule"><b>Verified partner spend</b><small class="points">Rule value</small><small>After QR/bill verification and any return window.</small></div><div class="rule"><b>Refund or fraud</b><small class="points">Reverse</small><small>Pending points are cancelled; available points receive a linked reversal entry.</small></div></div><div class="state"><span>CALCULATED</span><i>→</i><span>PENDING</span><i>→</i><span>AVAILABLE</span><i>→</i><span>USED or EXPIRED</span><i>·</i><span>CANCELLED / REVERSED when required</span></div></section>
+      <section class="chunk" id="rewards">
+        <div class="chunk-head">
+          <span class="num">07</span>
+          <div>
+            <h2>How points are earned</h2>
+            <p>
+              Users see the amount, reason, availability date, and expiry before
+              or after each eligible action.
+            </p>
+          </div>
+        </div>
+        <div class="flow">
+          <div class="node process">
+            <b>Eligible action happens</b
+            ><small>Signup · KYC · referral · service milestone</small>
+          </div>
+          <div class="arrow"><span>calculate</span>→</div>
+          <div class="node system">
+            <b>Check reward rule</b
+            ><small>Correct rule · cap · duplicate · fraud</small>
+          </div>
+          <div class="arrow"><span>record</span>→</div>
+          <div class="node reward">
+            <b>Points Pending</b
+            ><small>Waiting for refund or review period</small>
+          </div>
+          <div class="arrow"><span>approved</span>→</div>
+          <div class="node reward">
+            <b>Points Available</b><small>User can redeem them</small>
+          </div>
+          <div class="arrow"><span>show</span>→</div>
+          <div class="node end">
+            <b>Rewards history</b><small>Reason, date, expiry and status</small>
+          </div>
+        </div>
+        <div class="rules">
+          <div class="rule">
+            <b>New account</b><small class="points">+100</small
+            ><small
+              >After successful phone verification and account creation.</small
+            >
+          </div>
+          <div class="rule">
+            <b>Each completed KYC step</b><small class="points">+10</small
+            ><small>One time for each listed verification capability.</small>
+          </div>
+          <div class="rule">
+            <b>Qualified referral</b><small class="points">Campaign value</small
+            ><small
+              >Only after the friend completes the published qualifying
+              action.</small
+            >
+          </div>
+          <div class="rule">
+            <b>Service completion</b><small class="points">Rule value</small
+            ><small
+              >Use a fixed, published milestone reward. Do not imply investment
+              return.</small
+            >
+          </div>
+          <div class="rule">
+            <b>Verified partner spend</b><small class="points">Rule value</small
+            ><small>After QR/bill verification and any return window.</small>
+          </div>
+          <div class="rule">
+            <b>Refund or fraud</b><small class="points">Reverse</small
+            ><small
+              >Pending points are cancelled; available points receive a linked
+              reversal entry.</small
+            >
+          </div>
+        </div>
+        <div class="state">
+          <span>CALCULATED</span><i>→</i><span>PENDING</span><i>→</i
+          ><span>AVAILABLE</span><i>→</i><span>USED or EXPIRED</span><i>·</i
+          ><span>CANCELLED / REVERSED when required</span>
+        </div>
+      </section>
 
-<section class="chunk" id="referral"><div class="chunk-head"><span class="num">08</span><div><h2>Referral creation and use</h2><p>A simple one-level referral. The inviter can always see what the friend must do next.</p></div></div><div class="flow"><div class="node user"><b>User opens Rewards</b><small>Tap Refer & Earn</small></div><div class="arrow"><span>create</span>→</div><div class="node system"><b>Referral link + code</b><small>Unique to this user and campaign</small></div><div class="arrow"><span>share</span>→</div><div class="node partner"><b>Friend opens link</b><small>App remembers the referral</small></div><div class="arrow"><span>join</span>→</div><div class="node process"><b>Friend creates account</b><small>Phone verified; attribution checked</small></div><div class="arrow"><span>qualify</span>→</div><div class="node process"><b>Friend completes required action</b><small>Shown clearly in campaign terms</small></div><div class="arrow"><span>reward</span>→</div><div class="node reward"><b>Points Pending</b><small>For inviter and/or friend</small></div></div><div class="branch"><div><b>VALID:</b> After the refund/fraud window, pending points become available and both users are notified.</div><div><b>NOT VALID:</b> Show the exact reason—existing account, expired link, self-referral, duplicate identity/device/payment, or action not completed.</div></div><div class="state"><span>LINK CREATED</span><i>→</i><span>CLICKED</span><i>→</i><span>ACCOUNT CREATED</span><i>→</i><span>WAITING FOR ACTION</span><i>→</i><span>QUALIFIED</span><i>→</i><span>POINTS AVAILABLE</span></div><div class="note"><b>Referral rule:</b> Do not reward only for sharing or installing. Reward when the referred person completes the exact action published in that campaign. Start with one referral level—no chain or MLM rewards.</div></section>
+      <section class="chunk" id="referral">
+        <div class="chunk-head">
+          <span class="num">08</span>
+          <div>
+            <h2>Referral creation and use</h2>
+            <p>
+              A simple one-level referral. The inviter can always see what the
+              friend must do next.
+            </p>
+          </div>
+        </div>
+        <div class="flow">
+          <div class="node user">
+            <b>User opens Rewards</b><small>Tap Refer & Earn</small>
+          </div>
+          <div class="arrow"><span>create</span>→</div>
+          <div class="node system">
+            <b>Referral link + code</b
+            ><small>Unique to this user and campaign</small>
+          </div>
+          <div class="arrow"><span>share</span>→</div>
+          <div class="node partner">
+            <b>Friend opens link</b><small>App remembers the referral</small>
+          </div>
+          <div class="arrow"><span>join</span>→</div>
+          <div class="node process">
+            <b>Friend creates account</b
+            ><small>Phone verified; attribution checked</small>
+          </div>
+          <div class="arrow"><span>qualify</span>→</div>
+          <div class="node process">
+            <b>Friend completes required action</b
+            ><small>Shown clearly in campaign terms</small>
+          </div>
+          <div class="arrow"><span>reward</span>→</div>
+          <div class="node reward">
+            <b>Points Pending</b><small>For inviter and/or friend</small>
+          </div>
+        </div>
+        <div class="branch">
+          <div>
+            <b>VALID:</b> After the refund/fraud window, pending points become
+            available and both users are notified.
+          </div>
+          <div>
+            <b>NOT VALID:</b> Show the exact reason—existing account, expired
+            link, self-referral, duplicate identity/device/payment, or action
+            not completed.
+          </div>
+        </div>
+        <div class="state">
+          <span>LINK CREATED</span><i>→</i><span>CLICKED</span><i>→</i
+          ><span>ACCOUNT CREATED</span><i>→</i><span>WAITING FOR ACTION</span
+          ><i>→</i><span>QUALIFIED</span><i>→</i><span>POINTS AVAILABLE</span>
+        </div>
+        <div class="note">
+          <b>Referral rule:</b> Do not reward only for sharing or installing.
+          Reward when the referred person completes the exact action published
+          in that campaign. Start with one referral level—no chain or MLM
+          rewards.
+        </div>
+      </section>
 
-<section class="chunk" id="redeem"><div class="chunk-head"><span class="num">09</span><div><h2>Use points and redeem a benefit</h2><p>Reserve points first, then issue the voucher or service benefit. Give points back if delivery fails.</p></div></div><div class="flow"><div class="node user"><b>Open Rewards</b><small>See available points only</small></div><div class="arrow"><span>browse</span>→</div><div class="node process"><b>Choose benefit</b><small>Voucher · service credit · health · membership</small></div><div class="arrow"><span>check</span>→</div><div class="node system"><b>Check balance and terms</b><small>Eligibility · stock · expiry · usage cap</small></div><div class="arrow"><span>confirm</span>→</div><div class="node reward"><b>Reserve points</b><small>Prevent double use</small></div><div class="arrow"><span>issue</span>→</div><div class="node partner"><b>Deliver benefit</b><small>Code, voucher, credit or booking</small></div><div class="arrow"><span>complete</span>→</div><div class="node end"><b>Ready to use</b><small>Show code, terms and expiry</small></div></div><div class="branch"><div><b>DELIVERY SUCCESS:</b> Mark points Used and show the benefit in My Rewards.</div><div><b>DELIVERY FAILED:</b> Release the reserved points automatically and explain what happened.</div></div></section>
+      <section class="chunk" id="redeem">
+        <div class="chunk-head">
+          <span class="num">09</span>
+          <div>
+            <h2>Use points and redeem a benefit</h2>
+            <p>
+              Reserve points first, then issue the voucher or service benefit.
+              Give points back if delivery fails.
+            </p>
+          </div>
+        </div>
+        <div class="flow">
+          <div class="node user">
+            <b>Open Rewards</b><small>See available points only</small>
+          </div>
+          <div class="arrow"><span>browse</span>→</div>
+          <div class="node process">
+            <b>Choose benefit</b
+            ><small>Voucher · service credit · health · membership</small>
+          </div>
+          <div class="arrow"><span>check</span>→</div>
+          <div class="node system">
+            <b>Check balance and terms</b
+            ><small>Eligibility · stock · expiry · usage cap</small>
+          </div>
+          <div class="arrow"><span>confirm</span>→</div>
+          <div class="node reward">
+            <b>Reserve points</b><small>Prevent double use</small>
+          </div>
+          <div class="arrow"><span>issue</span>→</div>
+          <div class="node partner">
+            <b>Deliver benefit</b
+            ><small>Code, voucher, credit or booking</small>
+          </div>
+          <div class="arrow"><span>complete</span>→</div>
+          <div class="node end">
+            <b>Ready to use</b><small>Show code, terms and expiry</small>
+          </div>
+        </div>
+        <div class="branch">
+          <div>
+            <b>DELIVERY SUCCESS:</b> Mark points Used and show the benefit in My
+            Rewards.
+          </div>
+          <div>
+            <b>DELIVERY FAILED:</b> Release the reserved points automatically
+            and explain what happened.
+          </div>
+        </div>
+      </section>
 
-<section class="chunk" id="partner"><div class="chunk-head"><span class="num">10</span><div><h2>Partner flow</h2><p>Simple wording for how a business joins, publishes services, completes work, and gets paid.</p></div></div><div class="flow"><div class="node partner"><b>Partner applies</b><small>Business, contact, bank and tax details</small></div><div class="arrow"><span>check</span>→</div><div class="node admin"><b>Admin reviews partner</b><small>Identity, documents and agreement</small></div><div class="arrow"><span>approve</span>→</div><div class="node partner"><b>Add service or offer</b><small>Price, terms, location and availability</small></div><div class="arrow"><span>review</span>→</div><div class="node admin"><b>Admin publishes</b><small>Approve or ask for changes</small></div><div class="arrow"><span>customer acts</span>→</div><div class="node partner"><b>Complete the work</b><small>Accept, update, upload proof</small></div><div class="arrow"><span>verify</span>→</div><div class="node end"><b>Settlement</b><small>Commission, invoice and payment status</small></div></div></section>
+      <section class="chunk" id="partner">
+        <div class="chunk-head">
+          <span class="num">10</span>
+          <div>
+            <h2>Partner flow</h2>
+            <p>
+              Simple wording for how a business joins, publishes services,
+              completes work, and gets paid.
+            </p>
+          </div>
+        </div>
+        <div class="flow">
+          <div class="node partner">
+            <b>Partner applies</b
+            ><small>Business, contact, bank and tax details</small>
+          </div>
+          <div class="arrow"><span>check</span>→</div>
+          <div class="node admin">
+            <b>Admin reviews partner</b
+            ><small>Identity, documents and agreement</small>
+          </div>
+          <div class="arrow"><span>approve</span>→</div>
+          <div class="node partner">
+            <b>Add service or offer</b
+            ><small>Price, terms, location and availability</small>
+          </div>
+          <div class="arrow"><span>review</span>→</div>
+          <div class="node admin">
+            <b>Admin publishes</b><small>Approve or ask for changes</small>
+          </div>
+          <div class="arrow"><span>customer acts</span>→</div>
+          <div class="node partner">
+            <b>Complete the work</b><small>Accept, update, upload proof</small>
+          </div>
+          <div class="arrow"><span>verify</span>→</div>
+          <div class="node end">
+            <b>Settlement</b
+            ><small>Commission, invoice and payment status</small>
+          </div>
+        </div>
+      </section>
 
-<section class="chunk" id="admin"><div class="chunk-head"><span class="num">11</span><div><h2>Administrator flow</h2><p>Admins work from separate queues. Important changes need a second person to approve them.</p></div></div><div class="flow"><div class="node admin"><b>Admin signs in</b><small>Role controls what can be seen and changed</small></div><div class="arrow"><span>open</span>→</div><div class="node admin"><b>My work queue</b><small>KYC · partner · order · payment · reward · support</small></div><div class="arrow"><span>claim</span>→</div><div class="node admin"><b>Open full case</b><small>User, partner, service, money and history</small></div><div class="arrow"><span>decide</span>→</div><div class="decision"><span>Important or risky change?</span></div><div class="arrow"><span>yes</span>→</div><div class="node admin"><b>Second admin approves</b><small>Maker-checker review</small></div><div class="arrow"><span>apply</span>→</div><div class="node end"><b>Update and notify</b><small>Save history, tell user/partner, close or escalate</small></div></div><div class="branch"><div><b>NO SECOND APPROVAL NEEDED:</b> The assigned admin can complete normal work allowed by their role.</div><div><b>NEEDS SECOND APPROVAL:</b> Large point changes, unusual refunds, KYC override, partner bank change, publishing financial offers, or permission changes.</div></div><div class="rules"><div class="rule"><b>Catalog team</b><small>Services, content, offers, prices and publishing.</small></div><div class="rule"><b>Operations team</b><small>Applications, visits, orders, bookings and fulfillment.</small></div><div class="rule"><b>KYC/compliance</b><small>Verification review, holds, consent and regulatory evidence.</small></div><div class="rule"><b>Finance team</b><small>Payments, refunds, partner commission, reconciliation and settlement.</small></div><div class="rule"><b>Rewards/risk team</b><small>Point rules, campaigns, referrals, suspicious activity and reversals.</small></div><div class="rule"><b>Support team</b><small>Chat, callback, complaint, grievance, SLA and escalation.</small></div></div><div class="note"><b>Admin rule:</b> Nobody edits or deletes payment, point, referral, or audit history. A correction creates a new linked correction entry and stores who approved it.</div></section>
+      <section class="chunk" id="admin">
+        <div class="chunk-head">
+          <span class="num">11</span>
+          <div>
+            <h2>Administrator flow</h2>
+            <p>
+              Admins work from separate queues. Important changes need a second
+              person to approve them.
+            </p>
+          </div>
+        </div>
+        <div class="flow">
+          <div class="node admin">
+            <b>Admin signs in</b
+            ><small>Role controls what can be seen and changed</small>
+          </div>
+          <div class="arrow"><span>open</span>→</div>
+          <div class="node admin">
+            <b>My work queue</b
+            ><small>KYC · partner · order · payment · reward · support</small>
+          </div>
+          <div class="arrow"><span>claim</span>→</div>
+          <div class="node admin">
+            <b>Open full case</b
+            ><small>User, partner, service, money and history</small>
+          </div>
+          <div class="arrow"><span>decide</span>→</div>
+          <div class="decision"><span>Important or risky change?</span></div>
+          <div class="arrow"><span>yes</span>→</div>
+          <div class="node admin">
+            <b>Second admin approves</b><small>Maker-checker review</small>
+          </div>
+          <div class="arrow"><span>apply</span>→</div>
+          <div class="node end">
+            <b>Update and notify</b
+            ><small>Save history, tell user/partner, close or escalate</small>
+          </div>
+        </div>
+        <div class="branch">
+          <div>
+            <b>NO SECOND APPROVAL NEEDED:</b> The assigned admin can complete
+            normal work allowed by their role.
+          </div>
+          <div>
+            <b>NEEDS SECOND APPROVAL:</b> Large point changes, unusual refunds,
+            KYC override, partner bank change, publishing financial offers, or
+            permission changes.
+          </div>
+        </div>
+        <div class="rules">
+          <div class="rule">
+            <b>Catalog team</b
+            ><small>Services, content, offers, prices and publishing.</small>
+          </div>
+          <div class="rule">
+            <b>Operations team</b
+            ><small
+              >Applications, visits, orders, bookings and fulfillment.</small
+            >
+          </div>
+          <div class="rule">
+            <b>KYC/compliance</b
+            ><small
+              >Verification review, holds, consent and regulatory
+              evidence.</small
+            >
+          </div>
+          <div class="rule">
+            <b>Finance team</b
+            ><small
+              >Payments, refunds, partner commission, reconciliation and
+              settlement.</small
+            >
+          </div>
+          <div class="rule">
+            <b>Rewards/risk team</b
+            ><small
+              >Point rules, campaigns, referrals, suspicious activity and
+              reversals.</small
+            >
+          </div>
+          <div class="rule">
+            <b>Support team</b
+            ><small
+              >Chat, callback, complaint, grievance, SLA and escalation.</small
+            >
+          </div>
+        </div>
+        <div class="note">
+          <b>Admin rule:</b> Nobody edits or deletes payment, point, referral,
+          or audit history. A correction creates a new linked correction entry
+          and stores who approved it.
+        </div>
+      </section>
 
-<section class="chunk" id="support"><div class="chunk-head"><span class="num">12</span><div><h2>When something goes wrong</h2><p>Every failure keeps the user’s work and gives one clear next action.</p></div></div><div class="flow"><div class="node error"><b>Action did not finish</b><small>KYC, payment, partner work, reward or redemption</small></div><div class="arrow"><span>show</span>→</div><div class="node process"><b>Simple reason</b><small>What happened and whether money/points moved</small></div><div class="arrow"><span>offer</span>→</div><div class="node process"><b>Best next action</b><small>Retry · upload · wait · change method · contact support</small></div><div class="arrow"><span>track</span>→</div><div class="node system"><b>Activity timeline</b><small>Status, expected time and support case</small></div><div class="arrow"><span>resolve</span>→</div><div class="node end"><b>Continue or close</b><small>Resume the original task without starting again</small></div></div></section>
-</main><footer>Simple flow companion to 03-product-design-architecture.md · TheBrokrs</footer>
-</body></html>
+      <section class="chunk" id="support">
+        <div class="chunk-head">
+          <span class="num">12</span>
+          <div>
+            <h2>When something goes wrong</h2>
+            <p>
+              Every failure keeps the user’s work and gives one clear next
+              action.
+            </p>
+          </div>
+        </div>
+        <div class="flow">
+          <div class="node error">
+            <b>Action did not finish</b
+            ><small>KYC, payment, partner work, reward or redemption</small>
+          </div>
+          <div class="arrow"><span>show</span>→</div>
+          <div class="node process">
+            <b>Simple reason</b
+            ><small>What happened and whether money/points moved</small>
+          </div>
+          <div class="arrow"><span>offer</span>→</div>
+          <div class="node process">
+            <b>Best next action</b
+            ><small
+              >Retry · upload · wait · change method · contact support</small
+            >
+          </div>
+          <div class="arrow"><span>track</span>→</div>
+          <div class="node system">
+            <b>Activity timeline</b
+            ><small>Status, expected time and support case</small>
+          </div>
+          <div class="arrow"><span>resolve</span>→</div>
+          <div class="node end">
+            <b>Continue or close</b
+            ><small>Resume the original task without starting again</small>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      Simple flow companion to 03-product-design-architecture.md · TheBrokrs
+    </footer>
+  </body>
+</html>
