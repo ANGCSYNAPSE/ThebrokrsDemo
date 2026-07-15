@@ -1,0 +1,1323 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>TheBrokrs — Connected Mobile App Wireframe</title>
+    <style>
+      :root {
+        --ink: #18221d;
+        --muted: #6d766f;
+        --green: #0b7b53;
+        --lime: #d8f56c;
+        --cream: #f6f6ef;
+        --line: #e5e7df;
+        --orange: #ff6b35;
+        --purple: #7457ff;
+        --yellow: #ffc83d;
+        --shadow: 0 18px 50px #16241d1c;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #e9eee8;
+        color: var(--ink);
+        font:
+          14px/1.45 Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          sans-serif;
+      }
+      .page {
+        max-width: 1460px;
+        margin: auto;
+        padding: 42px 24px 80px;
+      }
+      .intro {
+        display: flex;
+        justify-content: space-between;
+        gap: 30px;
+        align-items: end;
+        margin-bottom: 34px;
+      }
+      .eyebrow {
+        color: var(--green);
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-size: 11px;
+      }
+      .intro h1 {
+        font-size: clamp(28px, 4vw, 48px);
+        line-height: 1.03;
+        letter-spacing: -0.055em;
+        margin: 7px 0 10px;
+        max-width: 780px;
+      }
+      .intro p {
+        margin: 0;
+        color: var(--muted);
+        max-width: 720px;
+      }
+      .legend {
+        background: #fff;
+        border: 1px solid var(--line);
+        padding: 12px 16px;
+        border-radius: 16px;
+        white-space: nowrap;
+      }
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(5, 272px);
+        gap: 24px;
+        overflow-x: auto;
+        padding: 4px 4px 28px;
+        scroll-snap-type: x mandatory;
+      }
+      .mock {
+        scroll-snap-align: start;
+      }
+      .phone {
+        width: 272px;
+        height: 596px;
+        padding: 7px;
+        background: #101713;
+        border-radius: 38px;
+        box-shadow: var(--shadow);
+        position: relative;
+      }
+      .screen {
+        height: 100%;
+        background: var(--cream);
+        border-radius: 32px;
+        overflow: hidden;
+        position: relative;
+      }
+      .status {
+        height: 31px;
+        padding: 8px 18px 0;
+        display: flex;
+        justify-content: space-between;
+        font-size: 10px;
+        font-weight: 800;
+      }
+      .island {
+        position: absolute;
+        top: 7px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 72px;
+        height: 19px;
+        border-radius: 20px;
+        background: #101713;
+        z-index: 5;
+      }
+      .content {
+        height: calc(100% - 31px);
+        overflow-y: auto;
+        padding: 8px 14px 84px;
+        scrollbar-width: none;
+      }
+      .content::-webkit-scrollbar,
+      .rail::-webkit-scrollbar {
+        display: none;
+      }
+      .nav {
+        height: 68px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-top: 1px solid var(--line);
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        z-index: 10;
+        padding: 8px 4px 7px;
+      }
+      .nav button {
+        border: 0;
+        background: none;
+        color: #8a918c;
+        font: 600 9px inherit;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+        padding: 0;
+        cursor: pointer;
+      }
+      .nav .ico {
+        width: 23px;
+        height: 23px;
+        display: grid;
+        place-items: center;
+        border-radius: 8px;
+      }
+      .nav button.active {
+        color: var(--green);
+      }
+      .nav button.active .ico {
+        background: #e2f6a7;
+      }
+      .i {
+        width: 18px;
+        height: 18px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.9;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 2px 0 12px;
+      }
+      .avatar {
+        width: 34px;
+        height: 34px;
+        border-radius: 12px;
+        background: var(--yellow);
+        display: grid;
+        place-items: center;
+        font-weight: 900;
+      }
+      .hello {
+        font-size: 10px;
+        color: var(--muted);
+      }
+      .name {
+        font-size: 15px;
+        font-weight: 800;
+        line-height: 1.1;
+      }
+      .iconbtn {
+        width: 34px;
+        height: 34px;
+        border: 1px solid var(--line);
+        background: #fff;
+        border-radius: 12px;
+        display: grid;
+        place-items: center;
+      }
+      .reward-card {
+        background: var(--green);
+        color: white;
+        border-radius: 20px;
+        padding: 15px;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 15px;
+      }
+      .reward-card:after {
+        content: "";
+        position: absolute;
+        width: 95px;
+        height: 95px;
+        background: var(--lime);
+        border-radius: 50%;
+        right: -35px;
+        top: -42px;
+        opacity: 0.95;
+      }
+      .points {
+        font-size: 25px;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+      }
+      .soft {
+        font-size: 10px;
+        opacity: 0.75;
+      }
+      .reward-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+      }
+      .tiny-link {
+        font-size: 10px;
+        color: var(--lime);
+        font-weight: 800;
+      }
+      .section-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 15px 1px 9px;
+      }
+      .section-head b {
+        font-size: 14px;
+      }
+      .section-head span {
+        font-size: 10px;
+        color: var(--green);
+        font-weight: 800;
+      }
+      .services {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 11px 5px;
+      }
+      .service {
+        text-align: center;
+        font-size: 9.5px;
+        font-weight: 650;
+      }
+      .service .tile {
+        width: 48px;
+        height: 48px;
+        margin: 0 auto 5px;
+        border-radius: 15px;
+        display: grid;
+        place-items: center;
+        background: #fff;
+        border: 1px solid var(--line);
+      }
+      .service:nth-child(4n + 1) .tile {
+        background: #e4f5ed;
+        color: #08704c;
+      }
+      .service:nth-child(4n + 2) .tile {
+        background: #fff1db;
+        color: #c65720;
+      }
+      .service:nth-child(4n + 3) .tile {
+        background: #eeeaff;
+        color: #6045dc;
+      }
+      .service:nth-child(4n + 4) .tile {
+        background: #fff5c8;
+        color: #a06c00;
+      }
+      .service.more .tile {
+        background: #202b25;
+        color: #fff;
+      }
+      .benefits {
+        display: flex;
+        gap: 9px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 3px;
+      }
+      .benefit {
+        min-width: 205px;
+        height: 87px;
+        border-radius: 17px;
+        padding: 13px;
+        scroll-snap-align: start;
+        position: relative;
+        overflow: hidden;
+        background: #202b25;
+        color: #fff;
+      }
+      .benefit.alt {
+        background: #ffd861;
+        color: #302510;
+      }
+      .benefit.purple {
+        background: #7457ff;
+      }
+      .benefit b {
+        display: block;
+        width: 125px;
+        line-height: 1.2;
+      }
+      .benefit small {
+        font-size: 9px;
+        opacity: 0.8;
+      }
+      .benefit .bigicon {
+        position: absolute;
+        right: 12px;
+        bottom: 8px;
+        width: 45px;
+        height: 45px;
+        opacity: 0.9;
+      }
+      .quick {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .quick .card {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 15px;
+        padding: 11px;
+      }
+      .quick b {
+        font-size: 11px;
+        display: block;
+      }
+      .quick small {
+        font-size: 9px;
+        color: var(--muted);
+      }
+      .screen-title {
+        font-size: 22px;
+        line-height: 1.05;
+        letter-spacing: -0.04em;
+        margin: 7px 0 5px;
+      }
+      .screen-sub {
+        font-size: 10px;
+        color: var(--muted);
+        margin: 0 0 13px;
+      }
+      .searchbox {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 11px;
+        margin-bottom: 12px;
+        color: var(--muted);
+        font-size: 11px;
+      }
+      .chips {
+        display: flex;
+        gap: 6px;
+        overflow: auto;
+        margin-bottom: 13px;
+      }
+      .chip {
+        white-space: nowrap;
+        padding: 6px 10px;
+        border-radius: 99px;
+        background: #fff;
+        border: 1px solid var(--line);
+        font-size: 9px;
+        font-weight: 700;
+      }
+      .chip.active {
+        background: var(--ink);
+        color: #fff;
+      }
+      .result {
+        background: #fff;
+        border: 1px solid var(--line);
+        padding: 10px;
+        border-radius: 16px;
+        margin-bottom: 8px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .result .r-icon {
+        width: 43px;
+        height: 43px;
+        border-radius: 13px;
+        background: #e4f5ed;
+        color: var(--green);
+        display: grid;
+        place-items: center;
+      }
+      .result b {
+        font-size: 11px;
+        display: block;
+      }
+      .result small {
+        color: var(--muted);
+        font-size: 9px;
+      }
+      .arrow {
+        margin-left: auto;
+      }
+      .balance {
+        text-align: center;
+        background: linear-gradient(150deg, #18251e, #0b7b53);
+        border-radius: 22px;
+        color: #fff;
+        padding: 22px 14px 16px;
+        margin-bottom: 12px;
+      }
+      .balance .coin {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        margin: auto auto 8px;
+        background: var(--lime);
+        color: var(--green);
+        display: grid;
+        place-items: center;
+        font-size: 21px;
+        font-weight: 900;
+      }
+      .balance h2 {
+        font-size: 29px;
+        margin: 0;
+        letter-spacing: -0.05em;
+      }
+      .progress {
+        height: 7px;
+        border-radius: 9px;
+        background: #ffffff30;
+        margin: 13px 4px 5px;
+        overflow: hidden;
+      }
+      .progress i {
+        display: block;
+        width: 68%;
+        height: 100%;
+        background: var(--lime);
+      }
+      .progress-label {
+        display: flex;
+        justify-content: space-between;
+        font-size: 8px;
+      }
+      .earn {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 7px;
+      }
+      .earn div {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 10px 6px;
+        text-align: center;
+        font-size: 9px;
+      }
+      .earn .i {
+        color: var(--green);
+        margin-bottom: 4px;
+      }
+      .offer-hero {
+        background: #ff6b35;
+        border-radius: 21px;
+        padding: 18px 15px;
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 12px;
+      }
+      .offer-hero:after {
+        content: "%";
+        position: absolute;
+        right: 10px;
+        bottom: -24px;
+        font-size: 100px;
+        font-weight: 900;
+        opacity: 0.16;
+      }
+      .offer-hero h3 {
+        margin: 0;
+        font-size: 19px;
+        line-height: 1.1;
+        width: 150px;
+      }
+      .offer-hero p {
+        font-size: 9px;
+        width: 150px;
+      }
+      .offer-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .offer {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        overflow: hidden;
+      }
+      .offer .art {
+        height: 70px;
+        display: grid;
+        place-items: center;
+        background: #fff1db;
+        color: #ff6b35;
+      }
+      .offer:nth-child(2) .art {
+        background: #eeeaff;
+        color: #7457ff;
+      }
+      .offer:nth-child(3) .art {
+        background: #e4f5ed;
+        color: #0b7b53;
+      }
+      .offer:nth-child(4) .art {
+        background: #fff5c8;
+        color: #9b6b00;
+      }
+      .offer .copy {
+        padding: 8px;
+      }
+      .offer b {
+        font-size: 10px;
+        display: block;
+      }
+      .offer small {
+        font-size: 8.5px;
+        color: var(--muted);
+      }
+      .profile-card {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #18251e;
+        color: #fff;
+        border-radius: 19px;
+        padding: 14px;
+        margin-bottom: 10px;
+      }
+      .profile-card .avatar {
+        width: 47px;
+        height: 47px;
+        border-radius: 16px;
+      }
+      .profile-card b {
+        display: block;
+      }
+      .profile-card small {
+        font-size: 9px;
+        color: #b7c1bb;
+      }
+      .verified {
+        margin-left: auto;
+        background: var(--lime);
+        color: var(--green);
+        font-size: 8px;
+        font-weight: 900;
+        padding: 5px 7px;
+        border-radius: 9px;
+      }
+      .kyc {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 17px;
+        padding: 12px;
+        margin-bottom: 10px;
+      }
+      .kyc-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .kyc h3 {
+        font-size: 12px;
+        margin: 0;
+      }
+      .kyc p {
+        font-size: 9px;
+        color: var(--muted);
+        margin: 3px 0 9px;
+      }
+      .kyc .bar {
+        height: 6px;
+        background: #e8ebe6;
+        border-radius: 9px;
+      }
+      .kyc .bar i {
+        display: block;
+        width: 72%;
+        height: 100%;
+        background: var(--green);
+        border-radius: 9px;
+      }
+      .kyc .steps {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 6px;
+        font-size: 8px;
+        color: var(--muted);
+      }
+      .menu {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 17px;
+        padding: 2px 11px;
+      }
+      .menu-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border-bottom: 1px solid var(--line);
+        padding: 11px 0;
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .menu-row:last-child {
+        border: 0;
+      }
+      .menu-row .mini {
+        width: 31px;
+        height: 31px;
+        border-radius: 10px;
+        background: #eef6f0;
+        color: var(--green);
+        display: grid;
+        place-items: center;
+      }
+      .caption {
+        padding: 13px 7px 0;
+      }
+      .caption b {
+        display: block;
+        font-size: 13px;
+      }
+      .caption small {
+        color: #66716a;
+      }
+      .note {
+        margin-top: 28px;
+        padding: 18px 20px;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        color: var(--muted);
+      }
+      @media (max-width: 620px) {
+        .page {
+          padding: 26px 14px 60px;
+        }
+        .intro {
+          display: block;
+        }
+        .legend {
+          display: inline-block;
+          margin-top: 16px;
+        }
+        .gallery {
+          gap: 16px;
+        }
+      }
+      .mock[data-screen="home"] .services > .service:nth-child(8),
+      .mock[data-screen="home"] .services > .service:nth-child(9) {
+        display: none;
+      }
+      .mock[data-screen="home"] .service.more:after {
+        content: " +2";
+        color: #0b7b53;
+        font-weight: 900;
+      }
+    </style>
+    <link rel="stylesheet" href="02-flow.css" />
+    <link rel="stylesheet" href="02-layout.css" />
+    <link rel="stylesheet" href="02-home.css" />
+    <link rel="stylesheet" href="02-products.css" />
+    <link rel="stylesheet" href="02-premium.css" />
+  </head>
+  <body>
+    <svg width="0" height="0" style="position: absolute">
+      <defs>
+        <symbol id="home" viewBox="0 0 24 24">
+          <path d="m3 11 9-8 9 8v9a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z" />
+        </symbol>
+        <symbol id="search" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="7" />
+          <path d="m20 20-4-4" />
+        </symbol>
+        <symbol id="gift" viewBox="0 0 24 24">
+          <path
+            d="M20 12v9H4v-9M2 7h20v5H2zM12 7v14M12 7H7.5a2.5 2.5 0 1 1 2.4-3.2L12 7Zm0 0h4.5a2.5 2.5 0 1 0-2.4-3.2L12 7Z"
+          />
+        </symbol>
+        <symbol id="tag" viewBox="0 0 24 24">
+          <path d="M20 13 11 22l-9-9V4a2 2 0 0 1 2-2h9l7 7a3 3 0 0 1 0 4Z" />
+          <circle cx="7" cy="7" r="1" />
+        </symbol>
+        <symbol id="user" viewBox="0 0 24 24">
+          <circle cx="12" cy="8" r="4" />
+          <path d="M4 22a8 8 0 0 1 16 0" />
+        </symbol>
+        <symbol id="bell" viewBox="0 0 24 24">
+          <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4" />
+        </symbol>
+        <symbol id="plane" viewBox="0 0 24 24">
+          <path d="m22 2-7 20-4-9-9-4Z" />
+          <path d="M22 2 11 13" />
+        </symbol>
+        <symbol id="shield" viewBox="0 0 24 24">
+          <path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z" />
+          <path d="m9 12 2 2 4-4" />
+        </symbol>
+        <symbol id="heart" viewBox="0 0 24 24">
+          <path
+            d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+          />
+        </symbol>
+        <symbol id="trend" viewBox="0 0 24 24">
+          <path d="m3 17 6-6 4 4 8-10" />
+          <path d="M14 5h7v7" />
+        </symbol>
+        <symbol id="leaf" viewBox="0 0 24 24">
+          <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 4.7 19 2 19 2c1 5-1 12-8 14" />
+          <path d="M2 21c0-3 2-5 5-6" />
+        </symbol>
+        <symbol id="brief" viewBox="0 0 24 24">
+          <rect x="3" y="7" width="18" height="13" rx="2" />
+          <path d="M8 7V4h8v3M3 12h18" />
+        </symbol>
+        <symbol id="building" viewBox="0 0 24 24">
+          <path
+            d="M3 21h18M6 21V5l6-3 6 3v16M9 9h.01M15 9h.01M9 13h.01M15 13h.01M10 21v-4h4v4"
+          />
+        </symbol>
+        <symbol id="more" viewBox="0 0 24 24">
+          <circle cx="5" cy="12" r="1" />
+          <circle cx="12" cy="12" r="1" />
+          <circle cx="19" cy="12" r="1" />
+        </symbol>
+        <symbol id="star" viewBox="0 0 24 24">
+          <path
+            d="m12 2 3 6 7 .9-5 4.8 1.4 7-6.4-3.3-6.4 3.3 1.3-7-5-4.8L9 8Z"
+          />
+        </symbol>
+        <symbol id="arrow" viewBox="0 0 24 24">
+          <path d="m9 18 6-6-6-6" />
+        </symbol>
+        <symbol id="users" viewBox="0 0 24 24">
+          <path
+            d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"
+          />
+        </symbol>
+        <symbol id="doc" viewBox="0 0 24 24">
+          <path
+            d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"
+          />
+          <path d="M14 2v6h6M8 13h8M8 17h5" />
+        </symbol>
+        <symbol id="help" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M9.5 9a2.8 2.8 0 1 1 4.7 2c-1.2 1-2.2 1.5-2.2 3M12 18h.01" />
+        </symbol>
+      </defs>
+    </svg>
+    <main class="page">
+      <div class="intro">
+        <div>
+          <div class="eyebrow">SS1 · TheBrokrs premium mobile experience</div>
+          <h1>Trust, opportunity and everyday value—beautifully connected.</h1>
+          <p>
+            KYC lives inside Profile. Home is benefits-first, services are
+            instantly scannable, and every screen uses one consistent five-item
+            navigation.
+          </p>
+        </div>
+        <div class="legend">4 screens per row · Scroll inside each phone ↕</div>
+      </div>
+      <section class="gallery" id="gallery">
+        <article class="mock" data-screen="home">
+          <div class="phone">
+            <div class="screen">
+              <div class="island"></div>
+              <div class="status"><span>9:41</span><span>● ● ▰</span></div>
+              <div class="content">
+                <div class="home-utility">
+                  <button class="profile-pill" type="button" data-go="profile" aria-label="Open Rohit's profile"><span class="profile-avatar">RS</span><span><b>Rohit Sharma</b><small>Gold member</small></span><span class="profile-chevron">›</span></button>
+                  <button class="points-pill" type="button" data-go="rewards" aria-label="Open 2450 reward points"><b>2,450</b><span>●</span></button>
+                  <button class="iconbtn" type="button" data-go="inbox" aria-label="Open notifications"><svg class="i"><use href="#bell" /></svg><i class="alert-dot"></i></button>
+                </div>
+                <div class="section-head for-you-head"><b>It’s for you</b><span>See all</span></div>
+                <div class="benefits home-benefits">
+                  <div class="benefit" data-go="health"><small>MEMBER BENEFIT</small><b>Free health checkup this month</b><svg class="i bigicon"><use href="#heart" /></svg></div>
+                  <div class="benefit alt" data-go="invest"><small>LIMITED TIME</small><b>Earn 2× points on investments</b><svg class="i bigicon"><use href="#star" /></svg></div>
+                  <div class="benefit purple" data-go="family"><small>FAMILY PERK</small><b>Add family & unlock rewards</b><svg class="i bigicon"><use href="#users" /></svg></div>
+                </div>
+                <div class="section-head">
+                  <b>Our services</b><span>All services</span>
+                </div>
+                <div class="services">
+                  <div class="service">
+                    <div class="tile">
+                      <svg class="i"><use href="#trend" /></svg>
+                    </div>
+                    Investments
+                  </div>
+                  <div class="service">
+                    <div class="tile">
+                      <svg class="i"><use href="#shield" /></svg>
+                    </div>
+                    Insurance
+                  </div>
+                  <div class="service">
+                    <div class="tile">
+                      <svg class="i"><use href="#heart" /></svg>
+                    </div>
+                    Healthcare
+                  </div>
+                  <div class="service">
+                    <div class="tile">
+                      <svg class="i"><use href="#leaf" /></svg>
+                    </div>
+                    Farming
+                  </div>
+                  <div class="service">
+                    <div class="tile">
+                      <svg class="i"><use href="#brief" /></svg>
+                    </div>
+                    Business
+                  </div>
+                  <div class="service">
+                    <div class="tile">
+                      <svg class="i"><use href="#building" /></svg>
+                    </div>
+                    Property
+                  </div>
+                  <div class="service">
+                    <div class="tile">
+                      <svg class="i"><use href="#plane" /></svg>
+                    </div>
+                    Travel
+                  </div>
+                  <div class="service">
+                    <div class="tile">
+                      <svg class="i"><use href="#users" /></svg>
+                    </div>
+                    Consulting
+                  </div>
+                  <div class="service">
+                    <div class="tile">
+                      <svg class="i"><use href="#doc" /></svg>
+                    </div>
+                    IT Services
+                  </div>
+                  <div class="service more">
+                    <div class="tile">
+                      <svg class="i"><use href="#more" /></svg>
+                    </div>
+                    See more
+                  </div>
+                </div>
+                <div class="section-head">
+                  <b>Stay on track</b><span>View activity</span>
+                </div>
+                <div class="quick">
+                  <div class="card">
+                    <b>₹25,000 invested</b><small>Portfolio is up 4.2%</small>
+                  </div>
+                  <div class="card">
+                    <b>3 active benefits</b><small>Use before 31 July</small>
+                  </div>
+                </div>
+              </div>
+              <div class="nav"></div>
+            </div>
+          </div>
+          <div class="caption">
+            <b>01 · Home</b
+            ><small
+              >Rewards → 10 services → benefit carousel → useful
+              activity.</small
+            >
+          </div>
+        </article>
+        <article class="mock" data-screen="search">
+          <div class="phone">
+            <div class="screen">
+              <div class="island"></div>
+              <div class="status"><span>9:41</span><span>● ● ▰</span></div>
+              <div class="content">
+                <h2 class="screen-title">Find anything</h2>
+                <p class="screen-sub">
+                  Services, benefits, partners and help—all in one place.
+                </p>
+                <div class="searchbox">
+                  <svg class="i"><use href="#search" /></svg>Search “health
+                  insurance”
+                </div>
+                <div class="chips">
+                  <span class="chip active">Popular</span
+                  ><span class="chip">Services</span
+                  ><span class="chip">Partners</span
+                  ><span class="chip">Benefits</span>
+                </div>
+                <div class="section-head">
+                  <b>Trending searches</b><span>Clear</span>
+                </div>
+                <div class="result">
+                  <div class="r-icon">
+                    <svg class="i"><use href="#shield" /></svg>
+                  </div>
+                  <div>
+                    <b>Family health insurance</b
+                    ><small>Plans from ₹499/month</small>
+                  </div>
+                  <svg class="i arrow"><use href="#arrow" /></svg>
+                </div>
+                <div class="result">
+                  <div class="r-icon">
+                    <svg class="i"><use href="#trend" /></svg>
+                  </div>
+                  <div>
+                    <b>Start a monthly SIP</b
+                    ><small>Build wealth from ₹500</small>
+                  </div>
+                  <svg class="i arrow"><use href="#arrow" /></svg>
+                </div>
+                <div class="result">
+                  <div class="r-icon">
+                    <svg class="i"><use href="#heart" /></svg>
+                  </div>
+                  <div>
+                    <b>Book health checkup</b
+                    ><small>Save up to 30% nearby</small>
+                  </div>
+                  <svg class="i arrow"><use href="#arrow" /></svg>
+                </div>
+                <div class="section-head"><b>Browse categories</b></div>
+                <div class="services">
+                  <div class="service">
+                    <div class="tile">
+                      <svg class="i"><use href="#leaf" /></svg>
+                    </div>
+                    Farming
+                  </div>
+                  <div class="service">
+                    <div class="tile">
+                      <svg class="i"><use href="#building" /></svg>
+                    </div>
+                    Property
+                  </div>
+                  <div class="service">
+                    <div class="tile">
+                      <svg class="i"><use href="#brief" /></svg>
+                    </div>
+                    Business
+                  </div>
+                  <div class="service">
+                    <div class="tile">
+                      <svg class="i"><use href="#plane" /></svg>
+                    </div>
+                    Travel
+                  </div>
+                </div>
+              </div>
+              <div class="nav"></div>
+            </div>
+          </div>
+          <div class="caption">
+            <b>02 · Search</b
+            ><small
+              >Fast discovery with recent intent and category shortcuts.</small
+            >
+          </div>
+        </article>
+        <article class="mock" data-screen="rewards">
+          <div class="phone">
+            <div class="screen">
+              <div class="island"></div>
+              <div class="status"><span>9:41</span><span>● ● ▰</span></div>
+              <div class="content">
+                <h2 class="screen-title">Your rewards</h2>
+                <p class="screen-sub">
+                  Every useful action should feel rewarding.
+                </p>
+                <div class="balance">
+                  <div class="coin">B</div>
+                  <div class="soft">AVAILABLE BALANCE</div>
+                  <h2>2,450 pts</h2>
+                  <div class="progress"><i></i></div>
+                  <div class="progress-label">
+                    <span>Gold member</span><span>550 pts to Platinum</span>
+                  </div>
+                </div>
+                <div class="section-head">
+                  <b>Ways to earn</b><span>View all</span>
+                </div>
+                <div class="earn">
+                  <div>
+                    <svg class="i"><use href="#users" /></svg><br /><b
+                      >Refer a friend</b
+                    ><br />+500 pts
+                  </div>
+                  <div>
+                    <svg class="i"><use href="#shield" /></svg><br /><b
+                      >Complete KYC</b
+                    ><br />+200 pts
+                  </div>
+                  <div>
+                    <svg class="i"><use href="#star" /></svg><br /><b
+                      >Daily check-in</b
+                    ><br />+10 pts
+                  </div>
+                </div>
+                <div class="section-head">
+                  <b>Redeem points</b><span>All rewards</span>
+                </div>
+                <div class="result">
+                  <div class="r-icon">
+                    <svg class="i"><use href="#tag" /></svg>
+                  </div>
+                  <div>
+                    <b>₹250 shopping voucher</b
+                    ><small>2,000 points · Instant delivery</small>
+                  </div>
+                  <svg class="i arrow"><use href="#arrow" /></svg>
+                </div>
+                <div class="result">
+                  <div class="r-icon">
+                    <svg class="i"><use href="#heart" /></svg>
+                  </div>
+                  <div>
+                    <b>Annual health screening</b
+                    ><small>1,800 points · 40+ tests</small>
+                  </div>
+                  <svg class="i arrow"><use href="#arrow" /></svg>
+                </div>
+                <div class="section-head"><b>Recent activity</b></div>
+                <div class="quick">
+                  <div class="card">
+                    <b>+100 pts</b><small>Weekly streak</small>
+                  </div>
+                  <div class="card">
+                    <b>−500 pts</b><small>Coffee voucher</small>
+                  </div>
+                </div>
+              </div>
+              <div class="nav"></div>
+            </div>
+          </div>
+          <div class="caption">
+            <b>03 · Rewards</b
+            ><small
+              >Balance, tier progress, earning actions and redemption.</small
+            >
+          </div>
+        </article>
+        <article class="mock" data-screen="offers">
+          <div class="phone">
+            <div class="screen">
+              <div class="island"></div>
+              <div class="status"><span>9:41</span><span>● ● ▰</span></div>
+              <div class="content">
+                <h2 class="screen-title">Offers for you</h2>
+                <p class="screen-sub">
+                  Useful deals, chosen around your everyday needs.
+                </p>
+                <div class="offer-hero">
+                  <small>THEBROKRS EXCLUSIVE</small>
+                  <h3>Save more on everyday life</h3>
+                  <p>Fresh offers from verified partners, updated weekly.</p>
+                </div>
+                <div class="chips">
+                  <span class="chip active">For you</span
+                  ><span class="chip">Food</span><span class="chip">Health</span
+                  ><span class="chip">Travel</span>
+                </div>
+                <div class="section-head">
+                  <b>Popular near you</b><span>View all</span>
+                </div>
+                <div class="offer-grid">
+                  <div class="offer">
+                    <div class="art">
+                      <svg class="i" style="width: 34px; height: 34px">
+                        <use href="#tag" />
+                      </svg>
+                    </div>
+                    <div class="copy">
+                      <b>20% off dining</b><small>Bikanervala · 2 km</small>
+                    </div>
+                  </div>
+                  <div class="offer">
+                    <div class="art">
+                      <svg class="i" style="width: 34px; height: 34px">
+                        <use href="#heart" />
+                      </svg>
+                    </div>
+                    <div class="copy">
+                      <b>Free consultation</b
+                      ><small>Apollo 24|7 · Online</small>
+                    </div>
+                  </div>
+                  <div class="offer">
+                    <div class="art">
+                      <svg class="i" style="width: 34px; height: 34px">
+                        <use href="#plane" />
+                      </svg>
+                    </div>
+                    <div class="copy">
+                      <b>₹500 off flights</b><small>On bookings over ₹5k</small>
+                    </div>
+                  </div>
+                  <div class="offer">
+                    <div class="art">
+                      <svg class="i" style="width: 34px; height: 34px">
+                        <use href="#star" />
+                      </svg>
+                    </div>
+                    <div class="copy">
+                      <b>Buy 1, get 1 coffee</b><small>Café Coffee Day</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="nav"></div>
+            </div>
+          </div>
+          <div class="caption">
+            <b>04 · Offers</b
+            ><small
+              >Fixed taxonomy, clear eligibility, partner-led discovery.</small
+            >
+          </div>
+        </article>
+        <article class="mock" data-screen="profile">
+          <div class="phone">
+            <div class="screen">
+              <div class="island"></div>
+              <div class="status"><span>9:41</span><span>● ● ▰</span></div>
+              <div class="content">
+                <div class="top">
+                  <div>
+                    <h2 class="screen-title" style="margin: 0">Profile</h2>
+                    <div class="hello">Account, family and preferences</div>
+                  </div>
+                  <div class="iconbtn">⚙</div>
+                </div>
+                <div class="profile-card">
+                  <div class="avatar">RS</div>
+                  <div><b>Rohit Sharma</b><small>+91 98••• •••••</small></div>
+                  <span class="verified">VERIFIED</span>
+                </div>
+                <div class="kyc">
+                  <div class="kyc-top">
+                    <h3>KYC & account limits</h3>
+                    <span
+                      style="
+                        font-size: 9px;
+                        color: var(--green);
+                        font-weight: 800;
+                      "
+                      >Continue →</span
+                    >
+                  </div>
+                  <p>
+                    Level 2 active · Complete video verification to unlock all
+                    services.
+                  </p>
+                  <div class="bar"><i></i></div>
+                  <div class="steps">
+                    <span>✓ PAN</span><span>✓ Aadhaar</span
+                    ><span>○ Video KYC</span>
+                  </div>
+                </div>
+                <div class="menu">
+                  <div class="menu-row">
+                    <div class="mini">
+                      <svg class="i"><use href="#users" /></svg>
+                    </div>
+                    Family members<svg class="i arrow">
+                      <use href="#arrow" />
+                    </svg>
+                  </div>
+                  <div class="menu-row">
+                    <div class="mini">
+                      <svg class="i"><use href="#doc" /></svg>
+                    </div>
+                    Documents & health locker<svg class="i arrow">
+                      <use href="#arrow" />
+                    </svg>
+                  </div>
+                  <div class="menu-row">
+                    <div class="mini">
+                      <svg class="i"><use href="#shield" /></svg>
+                    </div>
+                    Privacy & security<svg class="i arrow">
+                      <use href="#arrow" />
+                    </svg>
+                  </div>
+                  <div class="menu-row">
+                    <div class="mini">
+                      <svg class="i"><use href="#bell" /></svg>
+                    </div>
+                    Notifications<svg class="i arrow">
+                      <use href="#arrow" />
+                    </svg>
+                  </div>
+                  <div class="menu-row">
+                    <div class="mini">
+                      <svg class="i"><use href="#help" /></svg>
+                    </div>
+                    Help & support<svg class="i arrow">
+                      <use href="#arrow" />
+                    </svg>
+                  </div>
+                </div>
+                <div class="section-head">
+                  <b>App language</b><span>English · बदलें</span>
+                </div>
+              </div>
+              <div class="nav"></div>
+            </div>
+          </div>
+          <div class="caption">
+            <b>05 · Profile + KYC</b
+            ><small
+              >KYC is contextual account setup—not a separate
+              destination.</small
+            >
+          </div>
+        </article>
+      </section>
+      <div class="note">
+        <b style="color: var(--ink)">Interaction model:</b> every
+        bottom-navigation item is clickable and smoothly brings its matching
+        screen into focus. Each phone body scrolls independently, while key
+        navigation remains fixed and thumb-friendly.
+      </div>
+      <section class="journey-map" aria-labelledby="journey-title">
+        <div class="journey-heading"><span>SS2 · Connected product journey</span><h2 id="journey-title">End-to-End User Flow Map</h2><p>One continuous journey—from first open to service purchase, rewards, partner redemption and long-term engagement.</p></div>
+        <div class="journey-lanes"><div class="lane onboard"><b>01 · Onboard</b><small>Identity and preferences</small></div><div class="lane service"><b>02 · Discover</b><small>Services and useful value</small></div><div class="lane reward"><b>03 · Engage</b><small>Rewards and referrals</small></div><div class="lane partner"><b>04 · Redeem</b><small>Partner offers and points</small></div></div>
+        <div class="journey-flow">
+          <div class="map-node onboard"><b>Install & Splash</b><small>Brand trust · fast loading</small></div><i>→</i><div class="map-node onboard"><b>Phone + OTP</b><small>Secure authentication</small></div><i>→</i><div class="map-node onboard"><b>Profile Setup</b><small>Interests · permissions</small></div><i>→</i><div class="map-node onboard solid"><b>Rewards-first Home</b><small>Services · benefits · activity</small></div>
+          <em>↓</em><div class="map-node service"><b>Search Services</b><small>Money · health · lifestyle</small></div><i>→</i><div class="map-node service"><b>Project Detail</b><small>Risk · return · documents</small></div><i>→</i><div class="map-node service"><b>Profile KYC Check</b><small>PAN + Aadhaar reusable</small></div><i>→</i><div class="map-node service solid"><b>eSign + Pay</b><small>UPI-first secure checkout</small></div>
+          <em>↓</em><div class="map-node reward"><b>Points Credited</b><small>Multiplier and ledger</small></div><i>→</i><div class="map-node reward"><b>Share Referral</b><small>Transparent rules</small></div><i>→</i><div class="map-node reward"><b>Friend Joins</b><small>OTP · profile · first action</small></div><i>→</i><div class="map-node reward solid"><b>Tier Progress</b><small>Gold → Platinum</small></div>
+          <em>↓</em><div class="map-node partner"><b>Discover Offer</b><small>Verified nearby partner</small></div><i>→</i><div class="map-node partner"><b>Activate Code</b><small>Timed QR · clear terms</small></div><i>→</i><div class="map-node partner"><b>Upload Bill</b><small>Geo + bill verification</small></div><i>→</i><div class="map-node outcome"><b>Value Loop</b><small>Save · earn · return</small></div>
+        </div>
+        <div class="journey-legend"><span class="onboard">Onboarding</span><span class="service">Service purchase</span><span class="reward">Rewards loop</span><span class="partner">Partner loop</span><span class="outcome">Retention outcome</span></div>
+        <div class="flow-branches">
+          <article><div class="branch-title"><span>AUTH</span><b>Entry and identity</b></div><div class="branch-chain"><i>Splash</i><b>→</b><i>Onboarding</i><b>→</b><i>OTP</i><b>→</b><i>Profile</i></div><p>Returning users skip onboarding and move from OTP directly to Home.</p></article>
+          <article><div class="branch-title"><span>KYC</span><b>Contextual verification</b></div><div class="branch-chain"><i>Service</i><b>→</b><i>Limit check</i><b>→</b><i>Profile KYC</i><b>→</b><i>Resume</i></div><p>PAN, Aadhaar or video verification appears only when the selected action requires it.</p></article>
+          <article><div class="branch-title"><span>SERVICE</span><b>Discovery to ownership</b></div><div class="branch-chain"><i>Search</i><b>→</b><i>Compare</i><b>→</b><i>Detail</i><b>→</b><i>eSign + Pay</i></div><p>Investments, Saffron, Mushroom, insurance, healthcare and IT share one trusted checkout pattern.</p></article>
+          <article><div class="branch-title"><span>VALUE</span><b>Rewards and retention</b></div><div class="branch-chain"><i>Action</i><b>→</b><i>Points</i><b>→</b><i>Tier</i><b>→</b><i>Redeem</i></div><p>Every eligible action writes to the ledger, progresses status and surfaces relevant offers.</p></article>
+          <article><div class="branch-title"><span>PARTNER</span><b>Offer redemption</b></div><div class="branch-chain"><i>Offer</i><b>→</b><i>Activate</i><b>→</b><i>Bill check</i><b>→</b><i>Credit</i></div><p>Timed codes, clear terms, geo/bill verification and automatic reward credit close the loop.</p></article>
+          <article><div class="branch-title"><span>CARE</span><b>Account and support</b></div><div class="branch-chain"><i>Inbox</i><b>→</b><i>Profile</i><b>→</b><i>Support</i><b>→</b><i>Resolved</i></div><p>Family, documents, consent, alerts and grievances stay accessible from Profile.</p></article>
+        </div>
+        <div class="flow-outcome"><div><span>PRIMARY OUTCOME</span><b>Useful action completed with confidence</b></div><strong>→</strong><div><span>RETURN SIGNAL</span><b>Live updates, rewards and reminders</b></div><strong>→</strong><div><span>LONG-TERM VALUE</span><b>Trust · retention · referrals</b></div></div>
+      </section>
+    </main>
+    <script>
+      const items = [
+        ["home", "Home"],
+        ["search", "Search"],
+        ["gift", "Rewards"],
+        ["tag", "Offers"],
+        ["user", "Profile"],
+      ];
+      document.querySelectorAll(".mock").forEach((mock) => {
+        const current = mock.dataset.screen;
+        const nav = mock.querySelector(".nav");
+        nav.innerHTML = items
+          .map(
+            ([id, label]) =>
+              `<button type="button" data-go="${id}" class="${id === current ? "active" : ""}" aria-label="Open ${label}"><span class="ico"><svg class="i"><use href="#${id}"></use></svg></span>${label}</button>`,
+          )
+          .join("");
+      });
+      document.addEventListener("click", (e) => {
+        const b = e.target.closest("[data-go]");
+        if (!b) return;
+        document
+          .querySelector(`[data-screen="${b.dataset.go}"]`)
+          .scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+            inline: "nearest",
+          });
+      });
+    </script>
+    <script src="02-flow.js"></script>
+  </body>
+</html>
