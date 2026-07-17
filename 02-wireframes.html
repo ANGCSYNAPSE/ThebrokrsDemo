@@ -147,22 +147,26 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 3px;
+        justify-content: center;
         padding: 0;
         cursor: pointer;
       }
       .nav .ico {
-        width: 23px;
-        height: 23px;
+        width: 38px;
+        height: 38px;
         display: grid;
         place-items: center;
-        border-radius: 8px;
+        border-radius: 12px;
       }
       .nav button.active {
         color: var(--green);
       }
       .nav button.active .ico {
         background: #e2f6a7;
+      }
+      .nav button .i {
+        width: 21px;
+        height: 21px;
       }
       .i {
         width: 18px;
@@ -1290,19 +1294,19 @@
     </main>
     <script>
       const items = [
-        ["home", "Home"],
-        ["search", "Search"],
-        ["gift", "Rewards"],
-        ["tag", "Offers"],
-        ["user", "Profile"],
+        ["home", "Home", "home"],
+        ["brief", "Services", "search"],
+        ["gift", "Rewards", "gift"],
+        ["heart", "Beneficiary Offers", "tag"],
+        ["more", "More", "user"],
       ];
       document.querySelectorAll(".mock").forEach((mock) => {
         const current = mock.dataset.screen;
         const nav = mock.querySelector(".nav");
         nav.innerHTML = items
           .map(
-            ([id, label]) =>
-              `<button type="button" data-go="${id}" class="${id === current ? "active" : ""}" aria-label="Open ${label}"><span class="ico"><svg class="i"><use href="#${id}"></use></svg></span>${label}</button>`,
+            ([icon, label, target]) =>
+              `<button type="button" data-go="${target}" class="${target === current ? "active" : ""}" aria-label="${label}" title="${label}"><span class="ico" aria-hidden="true"><svg class="i"><use href="#${icon}"></use></svg></span></button>`,
           )
           .join("");
       });
